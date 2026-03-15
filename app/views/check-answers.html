@@ -1,0 +1,79 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Check your answers before sending" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    <h1 class="govuk-heading-xl">Check your answers before sending</h1>
+
+    {{ govukSummaryList({
+      rows: [
+      {
+        key: { text: "How many weeks old is your baby?" },
+        value: { text: data["baby-age-weeks"] if data["baby-age-weeks"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/baby-age-weeks",
+            text: "Change",
+            visuallyHiddenText: "how many weeks old is your baby?"
+          }]
+        }
+      },
+      {
+        key: { text: "What is your daily routine like?" },
+        value: { text: data["daily-routine"] if data["daily-routine"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/daily-routine",
+            text: "Change",
+            visuallyHiddenText: "what is your daily routine like?"
+          }]
+        }
+      },
+      {
+        key: { text: "Do you have concerns about bonding with your baby?" },
+        value: { text: data["bonding-concerns"] if data["bonding-concerns"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/bonding-concerns",
+            text: "Change",
+            visuallyHiddenText: "do you have concerns about bonding with your baby?"
+          }]
+        }
+      },
+      {
+        key: { text: "What activities interest you most?" },
+        value: { text: data["preferred-activities"] if data["preferred-activities"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/preferred-activities",
+            text: "Change",
+            visuallyHiddenText: "what activities interest you most?"
+          }]
+        }
+      },
+      {
+        key: { text: "How much time can you spend on activities?" },
+        value: { text: data["available-time"] if data["available-time"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/available-time",
+            text: "Change",
+            visuallyHiddenText: "how much time can you spend on activities?"
+          }]
+        }
+      }
+      ]
+    }) }}
+
+    <form method="post" novalidate>
+      {{ govukButton({ text: "Confirm and send" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
