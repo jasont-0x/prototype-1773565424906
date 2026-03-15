@@ -1,0 +1,42 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "What is your daily routine like?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["daily-routine"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["daily-routine"], href: "#daily-routine" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukRadios({
+      name: "daily-routine",
+      fieldset: {
+        legend: {
+          text: "What is your daily routine like?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      errorMessage: errors["daily-routine"] if errors else null,
+      value: data["daily-routine"],
+      items: [
+        { value: "very-unpredictable-baby-feeds-and-sleeps-at-different-times-", text: "Very unpredictable - baby feeds and sleeps at different times each day" },
+        { value: "some-patterns-emerging-roughly-similar-times-for-feeds-and-s", text: "Some patterns emerging - roughly similar times for feeds and sleep" },
+        { value: "fairly-predictable-clear-patterns-for-most-feeds-and-naps", text: "Fairly predictable - clear patterns for most feeds and naps" },
+        { value: "very-structured-set-times-for-feeds-sleep-and-activities", text: "Very structured - set times for feeds, sleep and activities" }
+      ]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
