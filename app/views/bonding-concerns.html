@@ -1,0 +1,42 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Do you have concerns about bonding with your baby?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["bonding-concerns"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["bonding-concerns"], href: "#bonding-concerns" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukRadios({
+      name: "bonding-concerns",
+      fieldset: {
+        legend: {
+          text: "Do you have concerns about bonding with your baby?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      errorMessage: errors["bonding-concerns"] if errors else null,
+      value: data["bonding-concerns"],
+      items: [
+        { value: "no-concerns-just-want-ideas-for-activities", text: "No concerns - just want ideas for activities" },
+        { value: "sometimes-worry-i-m-not-doing-enough", text: "Sometimes worry I'm not doing enough" },
+        { value: "feel-unsure-about-how-to-interact-with-my-baby", text: "Feel unsure about how to interact with my baby" },
+        { value: "struggling-to-feel-connected-to-my-baby", text: "Struggling to feel connected to my baby" }
+      ]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
