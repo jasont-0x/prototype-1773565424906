@@ -1,0 +1,43 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "How much time can you spend on activities?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["available-time"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["available-time"], href: "#available-time" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukRadios({
+      name: "available-time",
+      fieldset: {
+        legend: {
+          text: "How much time can you spend on activities?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: { text: "Time when you can give your baby your full attention." },
+      errorMessage: errors["available-time"] if errors else null,
+      value: data["available-time"],
+      items: [
+        { value: "5-to-10-minutes-at-a-time", text: "5 to 10 minutes at a time" },
+        { value: "15-to-20-minutes-at-a-time", text: "15 to 20 minutes at a time" },
+        { value: "30-minutes-or-longer", text: "30 minutes or longer" },
+        { value: "it-varies-day-to-day", text: "It varies day to day" }
+      ]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
