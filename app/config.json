@@ -1,0 +1,10 @@
+{
+  "serviceName": "Get bonding activities for your baby",
+  "serviceUrl": "/start",
+  "useAuth": false,
+  "plugins": {
+    "govuk-frontend": {
+      "rebrand": true
+    }
+  }
+}
