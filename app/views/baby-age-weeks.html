@@ -1,0 +1,42 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "How many weeks old is your baby?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["baby-age-weeks"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["baby-age-weeks"], href: "#baby-age-weeks" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukRadios({
+      name: "baby-age-weeks",
+      fieldset: {
+        legend: {
+          text: "How many weeks old is your baby?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      errorMessage: errors["baby-age-weeks"] if errors else null,
+      value: data["baby-age-weeks"],
+      items: [
+        { value: "6-to-7-weeks", text: "6 to 7 weeks" },
+        { value: "8-to-9-weeks", text: "8 to 9 weeks" },
+        { value: "10-to-11-weeks", text: "10 to 11 weeks" },
+        { value: "12-weeks-or-older", text: "12 weeks or older" }
+      ]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
