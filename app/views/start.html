@@ -1,0 +1,23 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Get personalised bonding activities for your baby" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">Get personalised bonding activities for your baby</h1>
+    <p class="govuk-body">Get activities and tips to help you bond with your baby.</p>
+    <p class="govuk-body">You will need:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>Your baby's age in weeks</li>
+      <li>Your email address</li>
+    </ul>
+    <p class="govuk-body">It takes around <strong>2 to 3 minutes</strong> to complete.</p>
+    {{ govukButton({
+      text: "Start now",
+      href: "/baby-age-weeks",
+      isStartButton: true
+    }) }}
+  </div>
+</div>
+{% endblock %}
