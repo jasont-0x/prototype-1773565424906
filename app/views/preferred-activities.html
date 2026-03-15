@@ -1,0 +1,42 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "What activities interest you most?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["preferred-activities"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["preferred-activities"], href: "#preferred-activities" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukRadios({
+      name: "preferred-activities",
+      fieldset: {
+        legend: {
+          text: "What activities interest you most?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      errorMessage: errors["preferred-activities"] if errors else null,
+      value: data["preferred-activities"],
+      items: [
+        { value: "gentle-physical-activities-like-massage-or-movement", text: "Gentle physical activities like massage or movement" },
+        { value: "talking-singing-or-reading-activities", text: "Talking, singing or reading activities" },
+        { value: "quiet-calming-activities-during-rest-time", text: "Quiet, calming activities during rest time" },
+        { value: "a-mix-of-different-types-of-activities", text: "A mix of different types of activities" }
+      ]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
